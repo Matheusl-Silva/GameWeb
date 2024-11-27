@@ -1,0 +1,6 @@
+#victoryModal .modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100% - (0.5rem * 2)); /* Ajusta para padding do body */
+}

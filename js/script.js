@@ -139,30 +139,35 @@ let cardsFlipped = 0
 let totalGuesses = 0
 let rightGuesses = 0
 let wrongGuesses = 0
+let matchedPairs = 0;
 
 function flipCard(cardId) {
-  flipSelectedCardToFront(cardId)
+  flipSelectedCardToFront(cardId);
   cardsFlipped++;
   totalGuesses++;
-  
+
   if (cardsFlipped % 2 != 0) {
-    previousSelected = getCardById(cardId)
-  }
-  
-  else {
-    currentSelected = getCardById(cardId)
-    if (previousSelected === currentSelected) {
-      console.log("Keep going")
+    previousSelected = getCardById(cardId);
+  } else {
+    currentSelected = getCardById(cardId);
+    if (previousSelected === currentSelected) { // Apenas um if aqui
       rightGuesses++;
-    }
-    else {
+      matchedPairs++;
+
+      if (matchedPairs === cards.length / 2) {
+        var victoryModal = new bootstrap.Modal(document.getElementById('victoryModal'));
+        victoryModal.show();
+      }
+    } else {
       wrongGuesses++;
       setTimeout(() => {
-        flipAllCardToBack()
+        flipAllCardToBack();
       }, 1000);
     }
+    previousSelected = "none"; // Reinicia previousSelected para o próximo par
+    currentSelected = "none"; // Reinicia currentSelected para o próximo par
   }
-  updateScore()
+  updateScore();
 }
 
 function updateScore() {

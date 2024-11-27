@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Web</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-primary bg-opacity-75">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Jogo da Memória</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Começo</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row rounded">
+      <div class="col-md-9 bg-info">
+        <div class="row bg-primary">
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img1" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img1" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img2" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img3" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img4" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img5" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img6" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img7" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img8" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img9" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img10" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img11" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img12" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img13" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img14" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img15" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img16" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+          <div class="col-xl-2 col-4 bg-secundary p-1">
+            <img id="img17" class="w-100 rounded" onclick="flipCard(this.id)" src="partetrasnovo.jpg">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-3 bg-info">
+        <div class="row">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col" colspan="2" class="text-center">Pontuação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="col">Total de Tentativas</th>
+                <th id="totalGuesses" scope="col">0</th>
+              </tr>
+              <tr>
+                <th scope="col">Tentativas corretas</th>
+                <th id="rightGuesses" scope="col">0</th>
+              </tr>
+              <tr>
+                <th scope="col">Tentativas erradas</th>
+                <th id="wrongGuesses" scope="col">0</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col">
+            <img class="w-100" src="confuso.png" alt=""> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary" onclick="start()">Começar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="js/script.js"></script> 
+</body>
+</html>

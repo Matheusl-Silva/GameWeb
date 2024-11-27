@@ -125,7 +125,7 @@ card18 = {
 }
 
 cards = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15, card16, card17, card18];
-cardValues = ["dockernovo.png", "javascriptnovo.png", "kotlinnovo.jpg", "awsnovo.jpg", "oraclenovo.png", "delphinovo.jpg", "phpnovo.png", "reactnovo.png", "Pythonnew.png"];
+cardValues = ["awsnovo.jpg","delphinovo.jpg","dockernovo.png","javascriptnovo.png","kotlinnovo.jpg","oraclenovo.png","phpnovo.png","postgresql.png","Pythonnew.png","reactnovo.png","awsnovo.jpg","delphinovo.jpg","dockernovo.png","javascriptnovo.png","kotlinnovo.jpg","oraclenovo.png","phpnovo.png","postgresql.png","Pythonnew.png","reactnovo.png"];
 
 let temp = []
 

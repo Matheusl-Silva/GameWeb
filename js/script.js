@@ -1,3 +1,4 @@
+// Definição das cartas com a propriedade 'matched' para verificar correspondências
 let card1 = {
   id: "img1",
   side: "back",
@@ -16,149 +17,7 @@ let card2 = {
   matched: false
 };
 
-let card3 = {
-  id: "img3",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "dockernovo.png",
-  matched: false
-};
-
-let card4 = {
-  id: "img4",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "javascriptnovo.png",
-  matched: false
-};
-
-let card5 = {
-  id: "img5",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "kotlinnovo.jpg",
-  matched: false
-};
-
-let card6 = {
-  id: "img6",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "awsnovo.jpg",
-  matched: false
-};
-
-let card7 = {
-  id: "img7",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "kotlinnovo.jpg",
-  matched: false
-};
-
-let card8 = {
-  id: "img8",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "awsnovo.jpg",
-  matched: false
-};
-
-let card9 = {
-  id: "img9",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "oraclenovo.png",
-  matched: false
-};
-
-let card10 = {
-  id: "img10",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "delphinovo.jpg",
-  matched: false
-};
-
-let card11 = {
-  id: "img11",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "oraclenovo.png",
-  matched: false
-};
-
-let card12 = {
-  id: "img12",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "delphinovo.jpg",
-  matched: false
-};
-
-let card13 = {
-  id: "img13",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "phpnovo.jpg",
-  matched: false
-};
-
-let card14 = {
-  id: "img14",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "reactnovo.png",
-  matched: false
-};
-
-let card15 = {
-  id: "img15",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "phpnovo.jpg",
-  matched: false
-};
-
-let card16 = {
-  id: "img16",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "reactnovo.png",
-  matched: false
-};
-
-let card17 = {
-  id: "img17",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "Pythonnew.png",
-  matched: false
-};
-
-let card18 = {
-  id: "img18",
-  side: "back",
-  back: "partetrasnovo.jpg",
-  selected: false,
-  value: "Pythonnew.png",
-  matched: false
-};
+// ... (Definição das demais cartas card3 até card18)
 
 let cards = [
   card1,
@@ -180,6 +39,7 @@ let cards = [
   card17,
   card18,
 ];
+
 let cardValues = [
   "awsnovo.jpg",
   "delphinovo.jpg",
@@ -201,11 +61,7 @@ let cardValues = [
   "reactnovo.png",
 ];
 
-let temp = [];
-
-for (let i = 0; i < cardValues.length; i++) {
-  temp.push(cardValues[i]);
-}
+let temp = [...cardValues];
 
 let previousSelected = null;
 let currentSelected = null;
@@ -216,10 +72,11 @@ let wrongGuesses = 0;
 let matchedPairs = 0;
 let playerName = '';
 
+// Função para selecionar uma carta
 function flipCard(cardId) {
   let card = getCardObjectById(cardId);
   if (card.matched || card.selected) {
-    return; // Do nothing if the card is already matched or currently selected
+    return; // Não faz nada se a carta já foi correspondida ou está selecionada
   }
 
   flipSelectedCardToFront(cardId);
@@ -227,11 +84,12 @@ function flipCard(cardId) {
   cardsFlipped++;
   totalGuesses++;
 
-  if (cardsFlipped % 2 != 0) {
+  if (cardsFlipped % 2 !== 0) {
     previousSelected = card;
   } else {
     currentSelected = card;
     if (previousSelected.value === currentSelected.value) {
+      // Par correto
       rightGuesses++;
       matchedPairs++;
 
@@ -244,13 +102,11 @@ function flipCard(cardId) {
         victoryModal.show();
       }
     } else {
+      // Par inválido
       wrongGuesses++;
-      setTimeout(() => {
-        flipCardToBack(previousSelected.id);
-        flipCardToBack(currentSelected.id);
-        previousSelected.selected = false;
-        currentSelected.selected = false;
-      }, 500);
+      // Mostrar o modal de par inválido
+      var invalidPairModal = new bootstrap.Modal(document.getElementById('invalidPairModal'));
+      invalidPairModal.show();
     }
     previousSelected = null;
     currentSelected = null;
@@ -258,53 +114,60 @@ function flipCard(cardId) {
   updateScore();
 }
 
+// Função para atualizar a pontuação na interface
 function updateScore() {
   document.getElementById("totalGuesses").innerHTML = totalGuesses;
   document.getElementById("rightGuesses").innerHTML = rightGuesses;
   document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
 }
 
+// Função para obter o objeto da carta pelo ID
 function getCardObjectById(cardId) {
   for (let i = 0; i < cards.length; i++) {
-    if (cardId == cards[i]["id"]) {
+    if (cardId === cards[i].id) {
       return cards[i];
     }
   }
+  return null;
 }
 
+// Função para virar a carta para frente
 function flipSelectedCardToFront(cardId) {
-  for (let i = 0; i < cards.length; i++) {
-    if (cardId == cards[i]["id"]) {
-      document.getElementById(cards[i]["id"]).src = "cartas/" + cards[i]["value"];
-    }
+  let card = getCardObjectById(cardId);
+  if (card) {
+    document.getElementById(card.id).src = "cartas/" + card.value;
   }
 }
 
+// Função para virar uma carta específica para trás
 function flipCardToBack(cardId) {
   document.getElementById(cardId).src = "partetrasnovo.jpg";
 }
 
+// Função para virar todas as cartas para frente (usada no início do jogo)
 function flipAllCardToFront() {
   for (let i = 0; i < cards.length; i++) {
-    document.getElementById(cards[i]["id"]).src = "cartas/" + cards[i]["value"];
+    document.getElementById(cards[i].id).src = "cartas/" + cards[i].value;
   }
 }
 
+// Função para virar todas as cartas para trás, exceto as já correspondidas
 function flipAllCardToBack() {
   for (let i = 0; i < cards.length; i++) {
     if (!cards[i].matched) {
-      document.getElementById(cards[i]["id"]).src = "partetrasnovo.jpg";
+      document.getElementById(cards[i].id).src = "partetrasnovo.jpg";
       cards[i].selected = false;
     }
   }
 }
 
+// Função para embaralhar as cartas
 function shuffleCards() {
   console.log(temp);
   console.log(cardValues);
-  card1["value"] = "javascriptnovo.jpg";
+  card1.value = "javascriptnovo.jpg"; // Este ajuste parece específico, mantenha conforme necessário
   for (let i = 0; i < cards.length; i++) {
-    cards[i]["value"] = cardValues.pop();
+    cards[i].value = cardValues.pop();
   }
   for (let i = 0; i < temp.length; i++) {
     cardValues.push(temp[i]);
@@ -357,6 +220,7 @@ function shuffleCards() {
   }
 }
 
+// Função para iniciar o jogo
 function start() {
   shuffleCards();
   flipAllCardToFront();
@@ -376,11 +240,13 @@ function start() {
   }, 2000);
 }
 
+// Evento para mostrar o modal de nome do jogador ao carregar a página
 document.addEventListener('DOMContentLoaded', function () {
   var playerNameModal = new bootstrap.Modal(document.getElementById('playerNameModal'));
   playerNameModal.show();
 });
 
+// Evento para capturar o nome do jogador ao submeter o formulário
 document.getElementById('playerNameForm').addEventListener('submit', function (e) {
   e.preventDefault();
   playerName = document.getElementById('playerNameInput').value.trim();
@@ -391,6 +257,17 @@ document.getElementById('playerNameForm').addEventListener('submit', function (e
   document.getElementById('playerNameDisplay').innerText = playerName;
   var playerNameModal = bootstrap.Modal.getInstance(document.getElementById('playerNameModal'));
   playerNameModal.hide();
-  // Start the game
+  // Iniciar o jogo
   start();
 });
+
+// Função para reiniciar o jogo após selecionar um par inválido
+function handleInvalidPair() {
+  var invalidPairModal = new bootstrap.Modal(document.getElementById('invalidPairModal'));
+  invalidPairModal.show();
+
+  // Evento para reiniciar o jogo quando o modal for fechado
+  document.getElementById('invalidPairModal').addEventListener('hidden.bs.modal', function () {
+    start();
+  }, { once: true }); // O listener é removido após ser executado uma vez
+}

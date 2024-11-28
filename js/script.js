@@ -162,7 +162,7 @@ function flipCard(cardId) {
       wrongGuesses++;
       setTimeout(() => {
         flipAllCardToBack();
-      }, 1000);
+      }, 500);
     }
     previousSelected = "none"; // Reinicia previousSelected para o próximo par
     currentSelected = "none"; // Reinicia currentSelected para o próximo par
@@ -247,5 +247,5 @@ function start() {
   updateScore()
   setTimeout(() => {
     flipAllCardToBack()
-  }, 3000);
+  }, 2000);
 }

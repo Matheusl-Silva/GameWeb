@@ -5,7 +5,7 @@ let card1 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "dockernovo.png",
-  matched: false
+  matched: false,
 };
 
 let card2 = {
@@ -14,7 +14,7 @@ let card2 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "javascriptnovo.png",
-  matched: false
+  matched: false,
 };
 
 let card3 = {
@@ -23,7 +23,7 @@ let card3 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "dockernovo.png",
-  matched: false
+  matched: false,
 };
 
 let card4 = {
@@ -32,7 +32,7 @@ let card4 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "javascriptnovo.png",
-  matched: false
+  matched: false,
 };
 
 let card5 = {
@@ -41,7 +41,7 @@ let card5 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "kotlinnovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card6 = {
@@ -50,7 +50,7 @@ let card6 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "awsnovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card7 = {
@@ -59,7 +59,7 @@ let card7 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "kotlinnovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card8 = {
@@ -68,7 +68,7 @@ let card8 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "awsnovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card9 = {
@@ -77,7 +77,7 @@ let card9 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "oraclenovo.png",
-  matched: false
+  matched: false,
 };
 
 let card10 = {
@@ -86,7 +86,7 @@ let card10 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "delphinovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card11 = {
@@ -95,7 +95,7 @@ let card11 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "oraclenovo.png",
-  matched: false
+  matched: false,
 };
 
 let card12 = {
@@ -104,7 +104,7 @@ let card12 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "delphinovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card13 = {
@@ -113,7 +113,7 @@ let card13 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "phpnovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card14 = {
@@ -122,7 +122,7 @@ let card14 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "reactnovo.png",
-  matched: false
+  matched: false,
 };
 
 let card15 = {
@@ -131,7 +131,7 @@ let card15 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "phpnovo.jpg",
-  matched: false
+  matched: false,
 };
 
 let card16 = {
@@ -140,7 +140,7 @@ let card16 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "reactnovo.png",
-  matched: false
+  matched: false,
 };
 
 let card17 = {
@@ -149,7 +149,7 @@ let card17 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "Pythonnew.png",
-  matched: false
+  matched: false,
 };
 
 let card18 = {
@@ -158,10 +158,9 @@ let card18 = {
   back: "partetrasnovo.jpg",
   selected: false,
   value: "Pythonnew.png",
-  matched: false
+  matched: false,
 };
 
-// Lista de todas as cartas
 let cards = [
   card1,
   card2,
@@ -183,7 +182,6 @@ let cards = [
   card18,
 ];
 
-// Valores das cartas (duplas)
 let cardValues = [
   "awsnovo.jpg",
   "delphinovo.jpg",
@@ -205,10 +203,8 @@ let cardValues = [
   "reactnovo.png",
 ];
 
-// Clone dos valores das cartas para reembaralhar
 let temp = [...cardValues];
 
-// Variáveis de controle do jogo
 let previousSelected = null;
 let currentSelected = null;
 let cardsFlipped = 0;
@@ -216,13 +212,11 @@ let totalGuesses = 0;
 let rightGuesses = 0;
 let wrongGuesses = 0;
 let matchedPairs = 0;
-let playerName = '';
+let playerName = "";
 
-// Função para selecionar uma carta
 function flipCard(cardId) {
   let card = getCardObjectById(cardId);
-  
-  // Não permite selecionar cartas já combinadas ou atualmente selecionadas
+
   if (card.matched || card.selected) {
     return;
   }
@@ -245,8 +239,11 @@ function flipCard(cardId) {
       currentSelected.matched = true;
 
       if (matchedPairs === cards.length / 2) {
-        document.getElementById('victoryModalLabel').innerText = 'Parabéns, ' + playerName + '!';
-        var victoryModal = new bootstrap.Modal(document.getElementById('victoryModal'));
+        document.getElementById("victoryModalLabel").innerText =
+          "Parabéns, " + playerName + "!";
+        var victoryModal = new bootstrap.Modal(
+          document.getElementById("victoryModal")
+        );
         victoryModal.show();
       }
     } else {
@@ -260,14 +257,12 @@ function flipCard(cardId) {
   updateScore();
 }
 
-// Função para atualizar a pontuação na interface
 function updateScore() {
   document.getElementById("totalGuesses").innerHTML = totalGuesses;
   document.getElementById("rightGuesses").innerHTML = rightGuesses;
   document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
 }
 
-// Função para obter o objeto da carta pelo ID
 function getCardObjectById(cardId) {
   for (let i = 0; i < cards.length; i++) {
     if (cardId === cards[i].id) {
@@ -277,7 +272,6 @@ function getCardObjectById(cardId) {
   return null;
 }
 
-// Função para virar a carta para frente
 function flipSelectedCardToFront(cardId) {
   let card = getCardObjectById(cardId);
   if (card) {
@@ -285,7 +279,6 @@ function flipSelectedCardToFront(cardId) {
   }
 }
 
-// Função para virar uma carta específica para trás
 function flipCardToBack(cardId) {
   document.getElementById(cardId).src = "partetrasnovo.jpg";
   let card = getCardObjectById(cardId);
@@ -294,14 +287,12 @@ function flipCardToBack(cardId) {
   }
 }
 
-// Função para virar todas as cartas para frente (usada no início do jogo)
 function flipAllCardToFront() {
   for (let i = 0; i < cards.length; i++) {
     document.getElementById(cards[i].id).src = "cartas/" + cards[i].value;
   }
 }
 
-// Função para virar todas as cartas para trás, exceto as já correspondidas
 function flipAllCardToBack() {
   for (let i = 0; i < cards.length; i++) {
     if (!cards[i].matched) {
@@ -311,23 +302,18 @@ function flipAllCardToBack() {
   }
 }
 
-// Função para embaralhar as cartas
 function shuffleCards() {
-  // Embaralha o array cardValues
   cardValues = shuffleArray(cardValues);
 
-  // Atribui os valores embaralhados às cartas
   for (let i = 0; i < cards.length; i++) {
     cards[i].value = cardValues[i];
     cards[i].matched = false;
     cards[i].selected = false;
   }
 
-  // Atualiza a ordem das cartas de forma aleatória
   cards = shuffleArray(cards);
 }
 
-// Função auxiliar para embaralhar um array (Fisher-Yates Shuffle)
 function shuffleArray(array) {
   let newArray = array.slice();
   for (let i = newArray.length - 1; i > 0; i--) {
@@ -337,7 +323,6 @@ function shuffleArray(array) {
   return newArray;
 }
 
-// Função para iniciar o jogo
 function start() {
   shuffleCards();
   flipAllCardToFront();
@@ -353,28 +338,31 @@ function start() {
   }, 2000);
 }
 
-// Evento para mostrar o modal de nome do jogador ao carregar a página
-document.addEventListener('DOMContentLoaded', function () {
-  var playerNameModal = new bootstrap.Modal(document.getElementById('playerNameModal'));
+document.addEventListener("DOMContentLoaded", function () {
+  var playerNameModal = new bootstrap.Modal(
+    document.getElementById("playerNameModal")
+  );
   playerNameModal.show();
 });
 
-// Evento para capturar o nome do jogador ao submeter o formulário
-document.getElementById('playerNameForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  playerName = document.getElementById('playerNameInput').value.trim();
-  if (playerName === '') {
-    alert('Por favor, insira seu nome.');
-    return;
-  }
-  document.getElementById('playerNameDisplay').innerText = playerName;
-  var playerNameModal = bootstrap.Modal.getInstance(document.getElementById('playerNameModal'));
-  playerNameModal.hide();
-  // Iniciar o jogo
-  start();
-});
+document
+  .getElementById("playerNameForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    playerName = document.getElementById("playerNameInput").value.trim();
+    if (playerName === "") {
+      alert("Por favor, insira seu nome.");
+      return;
+    }
+    document.getElementById("playerNameDisplay").innerText = playerName;
+    var playerNameModal = bootstrap.Modal.getInstance(
+      document.getElementById("playerNameModal")
+    );
+    playerNameModal.hide();
+    // Iniciar o jogo
+    start();
+  });
 
-// Função para reiniciar o jogo após selecionar um par inválido
 function handleInvalidPair() {
   // Desvira as cartas inválidas após um curto intervalo
   setTimeout(() => {

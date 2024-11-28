@@ -218,25 +218,29 @@ function flipCard(cardId) {
   let card = getCardObjectById(cardId);
 
   if (card.matched || card.selected) {
-    return;
+    return; // Ignora cliques em cartas já correspondidas ou selecionadas
   }
 
   flipSelectedCardToFront(cardId);
   card.selected = true;
   cardsFlipped++;
-  totalGuesses++;
 
-  if (cardsFlipped % 2 !== 0) {
+  if (cardsFlipped === 1) {
     previousSelected = card;
   } else {
     currentSelected = card;
+    totalGuesses++; // Incrementa totalGuesses apenas quando um par é completo
     if (previousSelected.value === currentSelected.value) {
       // Par correto
       rightGuesses++;
       matchedPairs++;
-
       previousSelected.matched = true;
       currentSelected.matched = true;
+      previousSelected.selected = false; // Desseleciona as cartas
+      currentSelected.selected = false;
+      previousSelected = null;
+      currentSelected = null;
+      cardsFlipped = 0;
 
       if (matchedPairs === cards.length / 2) {
         document.getElementById("victoryModalLabel").innerText =
@@ -247,12 +251,9 @@ function flipCard(cardId) {
         victoryModal.show();
       }
     } else {
-      // Par inválido
-      wrongGuesses++;
+      // Par inválido - chama a função para lidar com a invalidez
       handleInvalidPair();
     }
-    previousSelected = null;
-    currentSelected = null;
   }
   updateScore();
 }
@@ -335,6 +336,7 @@ function start() {
   updateScore();
   setTimeout(() => {
     flipAllCardToBack();
+    gameOverModal.hide();
   }, 2000);
 }
 
@@ -363,14 +365,24 @@ document
     start();
   });
 
+let gameOverModal = new bootstrap.Modal(
+  document.getElementById("gameOverModal")
+);
 function handleInvalidPair() {
-  // Desvira as cartas inválidas após um curto intervalo
   setTimeout(() => {
     if (previousSelected && currentSelected) {
       flipCardToBack(previousSelected.id);
       flipCardToBack(currentSelected.id);
+      previousSelected.selected = false;
+      currentSelected.selected = false;
+      previousSelected = null;
+      currentSelected = null;
+      cardsFlipped = 0;
     }
-    // Reinicia o jogo
-    start();
   }, 1000);
+  wrongGuesses++;
+  updateScore();
+  if (wrongGuesses >= 10) {
+    gameOverModal.show();
+  }
 }

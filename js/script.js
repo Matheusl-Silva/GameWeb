@@ -243,6 +243,7 @@ function start() {
   totalGuesses=0
   wrongGuesses=0
   rightGuesses=0
+  matchedPairs=0
   updateScore()
   setTimeout(() => {
     flipAllCardToBack()

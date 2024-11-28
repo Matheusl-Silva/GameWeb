@@ -17,8 +17,151 @@ let card2 = {
   matched: false
 };
 
-// ... (Definição das demais cartas card3 até card18)
+let card3 = {
+  id: "img3",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "dockernovo.png",
+  matched: false
+};
 
+let card4 = {
+  id: "img4",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "javascriptnovo.png",
+  matched: false
+};
+
+let card5 = {
+  id: "img5",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "kotlinnovo.jpg",
+  matched: false
+};
+
+let card6 = {
+  id: "img6",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "awsnovo.jpg",
+  matched: false
+};
+
+let card7 = {
+  id: "img7",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "kotlinnovo.jpg",
+  matched: false
+};
+
+let card8 = {
+  id: "img8",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "awsnovo.jpg",
+  matched: false
+};
+
+let card9 = {
+  id: "img9",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "oraclenovo.png",
+  matched: false
+};
+
+let card10 = {
+  id: "img10",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "delphinovo.jpg",
+  matched: false
+};
+
+let card11 = {
+  id: "img11",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "oraclenovo.png",
+  matched: false
+};
+
+let card12 = {
+  id: "img12",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "delphinovo.jpg",
+  matched: false
+};
+
+let card13 = {
+  id: "img13",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "phpnovo.jpg",
+  matched: false
+};
+
+let card14 = {
+  id: "img14",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "reactnovo.png",
+  matched: false
+};
+
+let card15 = {
+  id: "img15",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "phpnovo.jpg",
+  matched: false
+};
+
+let card16 = {
+  id: "img16",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "reactnovo.png",
+  matched: false
+};
+
+let card17 = {
+  id: "img17",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "Pythonnew.png",
+  matched: false
+};
+
+let card18 = {
+  id: "img18",
+  side: "back",
+  back: "partetrasnovo.jpg",
+  selected: false,
+  value: "Pythonnew.png",
+  matched: false
+};
+
+// Lista de todas as cartas
 let cards = [
   card1,
   card2,
@@ -40,6 +183,7 @@ let cards = [
   card18,
 ];
 
+// Valores das cartas (duplas)
 let cardValues = [
   "awsnovo.jpg",
   "delphinovo.jpg",
@@ -61,8 +205,10 @@ let cardValues = [
   "reactnovo.png",
 ];
 
+// Clone dos valores das cartas para reembaralhar
 let temp = [...cardValues];
 
+// Variáveis de controle do jogo
 let previousSelected = null;
 let currentSelected = null;
 let cardsFlipped = 0;
@@ -75,8 +221,10 @@ let playerName = '';
 // Função para selecionar uma carta
 function flipCard(cardId) {
   let card = getCardObjectById(cardId);
+  
+  // Não permite selecionar cartas já combinadas ou atualmente selecionadas
   if (card.matched || card.selected) {
-    return; // Não faz nada se a carta já foi correspondida ou está selecionada
+    return;
   }
 
   flipSelectedCardToFront(cardId);
@@ -104,9 +252,7 @@ function flipCard(cardId) {
     } else {
       // Par inválido
       wrongGuesses++;
-      // Mostrar o modal de par inválido
-      var invalidPairModal = new bootstrap.Modal(document.getElementById('invalidPairModal'));
-      invalidPairModal.show();
+      handleInvalidPair();
     }
     previousSelected = null;
     currentSelected = null;
@@ -142,6 +288,10 @@ function flipSelectedCardToFront(cardId) {
 // Função para virar uma carta específica para trás
 function flipCardToBack(cardId) {
   document.getElementById(cardId).src = "partetrasnovo.jpg";
+  let card = getCardObjectById(cardId);
+  if (card) {
+    card.selected = false;
+  }
 }
 
 // Função para virar todas as cartas para frente (usada no início do jogo)
@@ -163,61 +313,28 @@ function flipAllCardToBack() {
 
 // Função para embaralhar as cartas
 function shuffleCards() {
-  console.log(temp);
-  console.log(cardValues);
-  card1.value = "javascriptnovo.jpg"; // Este ajuste parece específico, mantenha conforme necessário
+  // Embaralha o array cardValues
+  cardValues = shuffleArray(cardValues);
+
+  // Atribui os valores embaralhados às cartas
   for (let i = 0; i < cards.length; i++) {
-    cards[i].value = cardValues.pop();
-  }
-  for (let i = 0; i < temp.length; i++) {
-    cardValues.push(temp[i]);
+    cards[i].value = cardValues[i];
+    cards[i].matched = false;
+    cards[i].selected = false;
   }
 
-  let randomNumber = Math.random();
-  console.log(randomNumber);
-  if (randomNumber > 0.5) {
-    cards = [
-      card1,
-      card5,
-      card11,
-      card4,
-      card15,
-      card9,
-      card3,
-      card14,
-      card7,
-      card13,
-      card10,
-      card12,
-      card18,
-      card2,
-      card16,
-      card6,
-      card17,
-      card8,
-    ];
-  } else {
-    cards = [
-      card11,
-      card4,
-      card5,
-      card1,
-      card15,
-      card3,
-      card14,
-      card9,
-      card10,
-      card13,
-      card7,
-      card12,
-      card16,
-      card6,
-      card2,
-      card17,
-      card8,
-      card18,
-    ];
+  // Atualiza a ordem das cartas de forma aleatória
+  cards = shuffleArray(cards);
+}
+
+// Função auxiliar para embaralhar um array (Fisher-Yates Shuffle)
+function shuffleArray(array) {
+  let newArray = array.slice();
+  for (let i = newArray.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
+  return newArray;
 }
 
 // Função para iniciar o jogo
@@ -230,10 +347,6 @@ function start() {
   matchedPairs = 0;
   previousSelected = null;
   currentSelected = null;
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].matched = false;
-    cards[i].selected = false;
-  }
   updateScore();
   setTimeout(() => {
     flipAllCardToBack();
@@ -263,11 +376,13 @@ document.getElementById('playerNameForm').addEventListener('submit', function (e
 
 // Função para reiniciar o jogo após selecionar um par inválido
 function handleInvalidPair() {
-  var invalidPairModal = new bootstrap.Modal(document.getElementById('invalidPairModal'));
-  invalidPairModal.show();
-
-  // Evento para reiniciar o jogo quando o modal for fechado
-  document.getElementById('invalidPairModal').addEventListener('hidden.bs.modal', function () {
+  // Desvira as cartas inválidas após um curto intervalo
+  setTimeout(() => {
+    if (previousSelected && currentSelected) {
+      flipCardToBack(previousSelected.id);
+      flipCardToBack(currentSelected.id);
+    }
+    // Reinicia o jogo
     start();
-  }, { once: true }); // O listener é removido após ser executado uma vez
+  }, 1000);
 }

@@ -1,4 +1,3 @@
-// Definição das cartas com a propriedade 'matched' para verificar correspondências
 let card1 = {
   id: "img1",
   side: "back",
@@ -218,7 +217,7 @@ function flipCard(cardId) {
   let card = getCardObjectById(cardId);
 
   if (card.matched || card.selected) {
-    return; // Ignora cliques em cartas já correspondidas ou selecionadas
+    return;
   }
 
   flipSelectedCardToFront(cardId);
@@ -229,14 +228,14 @@ function flipCard(cardId) {
     previousSelected = card;
   } else {
     currentSelected = card;
-    totalGuesses++; // Incrementa totalGuesses apenas quando um par é completo
+    totalGuesses++;
     if (previousSelected.value === currentSelected.value) {
       // Par correto
       rightGuesses++;
       matchedPairs++;
       previousSelected.matched = true;
       currentSelected.matched = true;
-      previousSelected.selected = false; // Desseleciona as cartas
+      previousSelected.selected = false;
       currentSelected.selected = false;
       previousSelected = null;
       currentSelected = null;
@@ -251,7 +250,6 @@ function flipCard(cardId) {
         victoryModal.show();
       }
     } else {
-      // Par inválido - chama a função para lidar com a invalidez
       handleInvalidPair();
     }
   }
